@@ -6,19 +6,21 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py loaddata fixtures/* && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/usr/src/da_cntt2/
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - .env.development
     depends_on:
       - db
+
 volumes:
   data:

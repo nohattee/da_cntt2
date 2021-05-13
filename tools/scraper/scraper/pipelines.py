@@ -6,11 +6,12 @@
 
 # useful for handling different item types with a single interface
 from bs4 import BeautifulSoup
+from django.utils import timezone
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 from dateutil import parser
 
-from modules.scrapers.models import NewsItem, News
+from modules.news.models import Item, News
 
 
 class ScraperPipeline:
@@ -28,23 +29,21 @@ class ScraperPipeline:
         }
         return output
 
-    # def extract_text_item(self, item):
-    #     output = {'title': ''.join(item['title'].getall()), 'content': ''.join(item['content'].getall()),
-    #               'author': ''.join(item['author'].getall()), 'category': ''.join(item['category'].getall()),
-    #               'tag': ''.join(item['tag'].getall()), 'summary': ''.join(item['summary'].getall()),
-    #               'publish_date': ''.join(item['publish_date'].getall())}
-    #     return output
-
     def process_item(self, item, spider):
-        if spider.spider.spider.item_type == 'news':
-            news = self.extract_text_item(item)
-            news, is_created = News.objects.get_or_create(**news)
-            if spider.spider.category not in news.categories.all():
-                news.categories.add(spider.spider.category)
+        news = self.extract_text_item(item)
+        news, is_created = News.objects.get_or_create(**news)
+        if spider.spider.category not in news.categories.all():
+            news.categories.add(spider.spider.category)
 
-            newsItem, is_created = NewsItem.objects.get_or_create(**item)
-            if is_created:
-                SpiderItem.objects.create()
+        newsItem, is_created = Item.objects.get_or_create(**item)
+        if is_created:
+            spider.scraper_log.item_set.add(newsItem)
 
         return item
 
+    def close_spider(self, spider):
+        spider_log = spider.spider.spider.spiderlog_set.latest('start_time')
+        spider_log.status = 'finished'
+        spider_log.end_time = timezone.now()
+        spider_log.description = 'Success'
+        spider_log.save()

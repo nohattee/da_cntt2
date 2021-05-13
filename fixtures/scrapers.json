@@ -1,16 +1,15 @@
 [
 {
-    "model": "scrapers.spider",
+    "model": "news.spider",
     "pk": 1,
     "fields": {
         "name": "Vasep (Tôm)",
         "url": "http://vasep.com.vn/san-pham-xuat-khau/tom?trang={}",
-        "is_multiple": true,
-        "item_type": "news"
+        "is_multiple": true
     }
 },
 {
-    "model": "scrapers.category",
+    "model": "news.category",
     "pk": 1,
     "fields": {
         "name": "Thuỷ sản",
@@ -22,18 +21,20 @@
     }
 },
 {
-    "model": "scrapers.scraper",
+    "model": "news.scraper",
     "pk": 1,
     "fields": {
         "name": "Vasep",
         "scheduler_type": "once",
-        "start_time": "05:44:19",
-        "start_date": "2021-05-09",
+        "start_time": "14:16:04",
+        "start_date": "2021-05-13",
+        "status": "stopped",
+        "job_id": "d20a42ff4495466d864a7bc9a87c7fd6",
         "is_active": true
     }
 },
 {
-    "model": "scrapers.scraperspider",
+    "model": "news.scraperspider",
     "pk": 1,
     "fields": {
         "scraper": 1,
@@ -42,7 +43,7 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 1,
     "fields": {
         "name": "link",
@@ -52,7 +53,7 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 2,
     "fields": {
         "name": "title",
@@ -62,7 +63,7 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 3,
     "fields": {
         "name": "summary",
@@ -72,7 +73,7 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 4,
     "fields": {
         "name": "content",
@@ -82,7 +83,7 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 5,
     "fields": {
         "name": "publish_date",
@@ -92,21 +93,21 @@
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 6,
     "fields": {
         "name": "category",
         "selector_type": "css",
-        "selector": "span > span > span > a > span",
+        "selector": "section > div.container.bg-white.pa-0.mb-15 > div.row.row-flex > div.col-md-9.col-xs-12.pl-0.pr-0.border-right-md.flex-1 > div.row.breadcrumb > span",
         "spider": 1
     }
 },
 {
-    "model": "scrapers.parser",
+    "model": "news.parser",
     "pk": 7,
     "fields": {
         "name": "tag",
-        "selector_type": "xpath",
+        "selector_type": "css",
         "selector": "div.related-tags > a",
         "spider": 1
     }
