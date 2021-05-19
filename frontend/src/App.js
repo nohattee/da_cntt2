@@ -1,13 +1,21 @@
-import * as React from 'react';
-import Image from './assets/test.png'
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
 
-function App() {
-    return (
-        <div>
-            <img src={Image}></img>
-            Hello World!!!
-        </div>
-    )
+import Home from "./pages/Home";
+import NewsDetail from "./pages/NewsDetail";
+
+
+export default function App() {
+  return (
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/news/:id">
+          <NewsDetail />
+        </Route>
+      </Switch>
+  )
 }
-
-export default App;

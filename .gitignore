@@ -102,7 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env.development
+.env
 .venv
 env/
 venv/
@@ -134,4 +134,3 @@ dmypy.json
 # Custom gitignore
 .DS_Store
 data/
-frontend/

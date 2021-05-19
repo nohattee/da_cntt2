@@ -41,7 +41,7 @@ class ScraperSpiderMiddleware:
         # (from other spider middleware) raises an exception.
 
         # Should return either None or an iterable of Request or item objects.
-        pass
+        print('dmcssssss')
 
     def process_start_requests(self, start_requests, spider):
         # Called with the start requests of the spider, and works

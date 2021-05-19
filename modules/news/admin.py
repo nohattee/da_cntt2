@@ -4,7 +4,7 @@ from mptt.admin import DraggableMPTTAdmin
 
 from modules.news.apps import scheduler
 from modules.news.forms import ParserInlineFormSet
-from modules.news.models import Spider, Scraper, ScraperSpider, Category, Parser, Item, News, SpiderLog
+from modules.news.models import Spider, Scraper, ScraperSpider, Category, Parser, Item, News
 
 
 # Register your models here.
@@ -14,11 +14,24 @@ class ParserTabularInline(admin.TabularInline):
     extra = 0
 
 
+class ItemTabularInline(admin.TabularInline):
+    model = Item
+    readonly_fields = [f.name for f in model._meta.fields]
+    fields = ['url']
+
+
+
 @admin.register(Spider)
 class SpiderAdmin(admin.ModelAdmin):
+    list_display = ['name', 'url', 'total_items']
     inlines = (
         ParserTabularInline,
     )
+
+    def total_items(self, obj):
+        return obj.item_set.count()
+
+    total_items.short_description = 'Total Items'
 
 
 class ScraperSpiderTabularInline(admin.TabularInline):
@@ -33,8 +46,8 @@ class ScraperAdmin(admin.ModelAdmin):
     )
 
     actions = ['setup_crawler', 'stop_crawler']
-    list_display = ['name', 'status', 'scheduler_type', 'is_active']
-    readonly_fields = ('status', 'job_id')
+    list_display = ['name', 'scheduler_type', 'start_time', 'start_date', 'is_active']
+    readonly_fields = ('job_id',)
 
     @admin.action(description='Start crawling now')
     def setup_crawler(self, request, queryset):
@@ -70,13 +83,7 @@ class ScraperAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'publish_date']
-
-
-@admin.register(SpiderLog)
-class SpiderLogAdmin(admin.ModelAdmin):
-    list_display = ['start_time', 'end_time', 'status']
-    readonly_fields = ['start_time', 'end_time', 'status', 'description', 'spider']
+    list_display = ['title', 'published_at', 'url']
 
 
 admin.site.register(Item)

@@ -56,9 +56,9 @@ DOWNLOAD_DELAY = 3
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'scraper.middlewares.ScraperSpiderMiddleware': 543,
-#}
+# SPIDER_MIDDLEWARES = {
+#    'tools.scraper.scraper.middlewares.ScraperSpiderMiddleware': 543,
+# }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -99,5 +99,10 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+# ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+# IMAGES_STORE = 'images'
+#
+# IMAGES_URLS_FIELD = 'image_link'
+# IMAGES_RESULT_FIELD = 'image'
+
 LOG_FILE = 'mylog.log'
-LOG_LEVEL = 'INFO'

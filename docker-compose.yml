@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    env_file:
+      - .env
 
   web:
     build: .
@@ -18,7 +20,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env.development
+      - .env
     depends_on:
       - db
 
