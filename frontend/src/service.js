@@ -13,9 +13,15 @@ const getListCategories = async (payload) => {
   return res.data;
 };
 
+const getDetailNews = async (payload) => {
+  const res = await axios.get(API_NEWS + payload.id)
+  return res.data
+}
+
 const service = {
   getListNews,
   getListCategories,
+  getDetailNews
 };
 
 export default service;

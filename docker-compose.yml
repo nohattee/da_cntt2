@@ -21,6 +21,7 @@ services:
       - .env
     depends_on:
       - db
+    restart: always
 
 volumes:
   data:

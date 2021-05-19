@@ -16,7 +16,7 @@ class NewsSpider(scrapy.Spider):
         self.news_thumbnail_link = None
 
     def start_requests(self):
-        page = 10
+        page = 1
         max_page = 9999
         if self.spider.scraper.crawl_type == 'latest':
             max_page = 10
@@ -30,7 +30,15 @@ class NewsSpider(scrapy.Spider):
             page += 1
 
     def errback(self, failure):
+        if failure.value.response.status == 401:
+            self.total_failed = self.total_failed + 1
+        if failure.value.response.status == 402:
+            self.total_failed = self.total_failed + 1
+        if failure.value.response.status == 403:
+            self.total_failed = self.total_failed + 1
         if failure.value.response.status == 404:
+            self.total_failed = self.total_failed + 1
+        if failure.value.response.status == 500:
             self.total_failed = self.total_failed + 1
 
     def parse(self, response):
