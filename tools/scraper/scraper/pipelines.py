@@ -12,6 +12,7 @@ from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 from dateutil import parser
 import requests
+from validators.url import url
 
 from modules.news.models import Item, News
 
@@ -25,7 +26,7 @@ class ScraperPipeline:
             thumbnail_link = BeautifulSoup(item['thumbnail_link'], 'html.parser')
             if thumbnail_link:
                 thumbnail_link = thumbnail_link.img['src']
-                if scraper.homepage not in thumbnail_link:
+                if not(url(thumbnail_link)):
                     thumbnail_link = scraper.homepage + thumbnail_link
         else:
             thumbnail_link = None
@@ -34,7 +35,7 @@ class ScraperPipeline:
             image_link = BeautifulSoup(item['image_link'], 'html.parser')
             if image_link:
                 image_link = image_link.img['src']
-                if scraper.homepage not in image_link:
+                if not(url(image_link)):
                     image_link = scraper.homepage + image_link
         else:
             image_link = None
