@@ -49,7 +49,7 @@ class ScraperPipeline:
             # 'category': BeautifulSoup(item['category']).get_text(),
             # 'tag': BeautifulSoup(item['tag']).get_text(),
             'summary': extract_text_with_bs4(item['summary']),
-            'published_at': parser.parse(' '.join(extract_text_with_bs4(item['published_at']).split(' - ')),
+            'published_at': parser.parse(' '.join(' '.join(extract_text_with_bs4(item['published_at']).split(' - ')).split(' | ')),
                                          fuzzy=True),
             'url': item['url']
         }
