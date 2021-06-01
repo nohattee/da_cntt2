@@ -1,13 +1,20 @@
 from gettext import ngettext
 from django.contrib import admin, messages
+from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
 from modules.news.apps import scheduler
 from modules.news.forms import ParserInlineFormSet
 from modules.news.models import Spider, Scraper, ScraperSpider, Category, Parser, Item, News
+from import_export import resources
 
 
 # Register your models here.
+
+class ItemResource(resources.ModelResource):
+    class Meta:
+        model = Item
+
 class ParserTabularInline(admin.TabularInline):
     model = Parser
     formset = ParserInlineFormSet
@@ -18,7 +25,6 @@ class ItemTabularInline(admin.TabularInline):
     model = Item
     readonly_fields = [f.name for f in model._meta.fields]
     fields = ['url']
-
 
 
 @admin.register(Spider)
@@ -82,7 +88,7 @@ class ScraperAdmin(admin.ModelAdmin):
 
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['title', 'published_at', 'url']
 
 
