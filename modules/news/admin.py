@@ -15,6 +15,7 @@ class ItemResource(resources.ModelResource):
     class Meta:
         model = Item
 
+
 class ParserTabularInline(admin.TabularInline):
     model = Parser
     formset = ParserInlineFormSet
