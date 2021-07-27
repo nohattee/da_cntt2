@@ -1,0 +1,4 @@
+.news-category-header:hover > .arrow {
+    transition-duration: 150ms;
+    transform: translateX(5px);
+}

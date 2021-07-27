@@ -1,0 +1,43 @@
+.slick-list{ 
+    margin: 0 -5px;
+}
+
+.slick-slide {
+    padding: 0 5px;
+}
+
+
+.next-arrow, 
+.prev-arrow {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  user-select: none;
+  top: 30%;
+  color: #909090;
+  font-size: 40px;
+  width: 40px;
+  background-color: #fff;
+  border-radius: 50px;
+  box-shadow: 2px 2px 19px 2px rgba(0,0,0,0.45);
+}
+
+.next-arrow:hover, 
+.prev-arrow:hover {
+    color: black
+}
+
+.prev-arrow {
+    left: -20px;
+}
+  
+.next-arrow {
+    right: -20px;
+}
+
+
+@media(max-width: 640px) {
+    .next-arrow, .prev-arrow {
+        display: none !important;
+    }
+}

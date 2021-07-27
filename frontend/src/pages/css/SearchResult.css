@@ -1,0 +1,9 @@
+.btn-submit { 
+    transition: transform .2s;
+}
+
+.btn-submit:hover { 
+    transform: scale(1.2);
+    outline: none;
+}
+
