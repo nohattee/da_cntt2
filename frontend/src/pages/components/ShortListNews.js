@@ -70,7 +70,8 @@ export default function ShortListNews(props) {
                 </Link>
                 <div className='mt-2 text-base'>
                     <p className='text-sm text-gray-500'>{(new Date(shortListNews[0].published_at)).toLocaleString('vi-VN', options)}</p>
-                    <p className='mt-3'>{shortListNews[0].summary}</p>
+                    <p className='mt-3' dangerouslySetInnerHTML={{ __html: shortListNews[0].summary }} />
+
                 </div>
             </div >
             <div className='card-side flex flex-col'>

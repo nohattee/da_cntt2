@@ -41,7 +41,7 @@ export default function ListView(props) {
                                 <h2 className="text-2xl font-bold text-gray-900 title-font hover:underline">{item.title}</h2>
                             </Link>
                             <p className='date pt-2 mb-2 text-gray-500 text-base'>{(new Date(item.published_at)).toLocaleString('vi-VN', options)}</p>
-                            <p className="leading-relaxed text-black text-lg">{item.summary}</p>
+                            <p className="leading-relaxed text-black text-lg" dangerouslySetInnerHTML={{ __html: item.summary }} />
                         </div>
                     </div>
                 ))

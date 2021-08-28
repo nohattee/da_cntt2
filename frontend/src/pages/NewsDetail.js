@@ -82,9 +82,7 @@ export default function NewsDetail() {
                     <hr className='mt-5 mx-auto w-3/4 md:w-1/2 lg:w-1/4 border-black' />
                     <div className='container mx-auto page-detail mt-7' >
                         <div className='px-2 xl:px-48'>
-                            <div className='summary text-center font-bold text-lg md:text-xl'>
-                                <p>{news.summary}</p>
-                            </div>
+                            <div className='summary text-center font-bold text-lg md:text-xl' dangerouslySetInnerHTML={{ __html: news.summary }} />
                             <div>
                                 {
                                     news.image_link !== null ?
@@ -92,9 +90,7 @@ export default function NewsDetail() {
                                         (<img src={news.thumbnail_link} alt="img" className='w-full lg:w-3/4 mx-auto my-7' />)
                                 }
                             </div>
-                            <div className='content text-lg px-2 lg:px-10 md:text-xl'>
-                                <p>{news.content}</p>
-                            </div>
+                            <div className='content text-lg px-2 lg:px-10 md:text-xl' dangerouslySetInnerHTML={{ __html: news.content }} />
                         </div>
                     </div>
                 </article>
